@@ -77,7 +77,7 @@ def init_options(proxy=None, cookie=None, ua=None, referer=None):
     urllib2.install_opener(urllib2.build_opener(urllib2.ProxyHandler({'http': proxy})) if proxy else None)
 
 if __name__ == "__main__":
-    print "%s #v%s\n%s\n by: %s\n" % (NAME, VERSION, COMMENT, AUTHOR)
+    print "%s #v%s\n by: %s\n" % (NAME, VERSION, AUTHOR)
     parser = optparse.OptionParser(version=VERSION)
     parser.add_option("-u", "--url", dest="url", help="Target URL (e.g. \"http://www.target.com\")")
     parser.add_option("--cookie", dest="cookie", help="HTTP Cookie header value")
