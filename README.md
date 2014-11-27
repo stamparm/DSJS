@@ -7,7 +7,6 @@ As of optional settings it supports HTTP proxy together with HTTP header values 
 ```
 $ python dsjs.py 
 Damn Small JS Scanner (DSJS) < 100 LoC (Lines of Code) #v0.1a
-(derivative work from Retire.js - https://bekk.github.io/retire.js/)
  by: Miroslav Stampar (@stamparm)
 
 Usage: dsjs.py [options]
@@ -25,10 +24,20 @@ Options:
 ```
 $ python dsjs.py -u www.test.com
 Damn Small JS Scanner (DSJS) < 100 LoC (Lines of Code) #v0.1a
-(derivative work from Retire.js - https://bekk.github.io/retire.js/)
  by: Miroslav Stampar (@stamparm)
 
  [x] jquery v1.7.2 (< v1.9.0b1) (info: 'http://bugs.jquery.com/ticket/11290; http://research.insecurelabs.org/jquery/test/')
+
+scan results: possible vulnerabilities found
+```
+
+```
+$ python dsjs.py -u www.target.com
+Damn Small JS Scanner (DSJS) < 100 LoC (Lines of Code) #v0.1a
+ by: Miroslav Stampar (@stamparm)
+
+ [x] jquery v1.4.2 (< v1.6.3) (info: 'http://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2011-4969; http://research.insecurelabs.org/jquery/test/')
+ [x] jquery v1.4.2 (< v1.9.0b1) (info: 'http://bugs.jquery.com/ticket/11290; http://research.insecurelabs.org/jquery/test/')
 
 scan results: possible vulnerabilities found
 ```
