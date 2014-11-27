@@ -22,7 +22,7 @@ Options:
 ```
 
 ```
-$ python dsjs.py -u www.test.com
+$ python dsjs.py -u "http://www.test.com/"
 Damn Small JS Scanner (DSJS) < 100 LoC (Lines of Code) #v0.1a
  by: Miroslav Stampar (@stamparm)
 
@@ -32,7 +32,7 @@ scan results: possible vulnerabilities found
 ```
 
 ```
-$ python dsjs.py -u www.target.com
+$ python dsjs.py -u "http://www.target.com/"
 Damn Small JS Scanner (DSJS) < 100 LoC (Lines of Code) #v0.1a
  by: Miroslav Stampar (@stamparm)
 
