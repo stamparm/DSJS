@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 import codecs, cookielib, distutils.version, glob, hashlib, json, optparse, os, re, tempfile, urllib, urllib2, urlparse
 
-NAME, VERSION, AUTHOR, LICENSE, COMMENT = "Damn Small JS Scanner (DSJS) < 100 LoC (Lines of Code)", "0.1a", "Miroslav Stampar (@stamparm)", "Public domain (FREE)", "(derivative work from Retire.js - https://bekk.github.io/retire.js/)"
+NAME, VERSION, AUTHOR, LICENSE, COMMENT = "Damn Small JS Scanner (DSJS) < 100 LoC (Lines of Code)", "0.1b", "Miroslav Stampar (@stamparm)", "Public domain (FREE)", "(derivative work from Retire.js - https://bekk.github.io/retire.js/)"
 
 COOKIE, UA, REFERER = "Cookie", "User-Agent", "Referer"                                                         # optional HTTP header names
 TIMEOUT = 30                                                                                                    # connection timeout in seconds
@@ -47,11 +47,15 @@ def scan_page(url):
                     hashes[hashlib.sha1(_).hexdigest()] = script
         if scripts:
             definitions = _get_definitions()
+            for _ in definitions["dont check"]["extractors"]["uri"]:
+                for script in dict(scripts):
+                    if re.search(_, script):
+                        del scripts[script]
             for library, definition in definitions.items():
                 version = None
                 for item in definition["extractors"].get("hashes", {}).items():
                     if item[0] in hashes:
-                        version = item[1]                
+                        version = item[1]
                 for part in ("filename", "uri"):
                     for regex in (_.replace(RETIRE_JS_VERSION_MARKER, "(?P<version>[^\s]+)") for _ in definition["extractors"].get(part, [])):
                         for script in scripts:
