@@ -1,6 +1,6 @@
 ![Logo](https://i.imgur.com/Px4z1o6.png)
 
-**Damn Small JS Scanner** (DSJS) is a fully functional JavaScript library vulnerability scanner written in under 100 lines of code. It has to be noted that it is a derivative work from [Retire.js](https://bekk.github.io/retire.js/) project.
+**Damn Small JS Scanner** (DSJS) is a fully functional JavaScript (obsolete) library vulnerability scanner written in under 100 lines of code. It has to be noted that it is a derivative work from [Retire.js](https://bekk.github.io/retire.js/) project.
 
 As of optional settings it supports HTTP proxy together with HTTP header values "User-Agent", "Referer" and "Cookie".
 
