@@ -23,7 +23,7 @@ Options:
 ```
 
 ```
-$ $ python dsjs.py -u www.test.com
+$ python dsjs.py -u www.test.com
 Damn Small JS Scanner (DSJS) < 100 LoC (Lines of Code) #v0.1a
 (derivative work from Retire.js - https://bekk.github.io/retire.js/)
  by: Miroslav Stampar (@stamparm)
