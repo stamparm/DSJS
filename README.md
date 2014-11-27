@@ -36,8 +36,9 @@ $ python dsjs.py -u "http://www.target.com/"
 Damn Small JS Scanner (DSJS) < 100 LoC (Lines of Code) #v0.1a
  by: Miroslav Stampar (@stamparm)
 
- [x] jquery v1.4.2 (< v1.6.3) (info: 'http://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2011-4969; http://research.insecurelabs.org/jquery/test/')
- [x] jquery v1.4.2 (< v1.9.0b1) (info: 'http://bugs.jquery.com/ticket/11290; http://research.insecurelabs.org/jquery/test/')
+ [x] jquery v1.4.4 (< v1.6.3) (info: 'http://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2011-4969; http://research.insecurelabs.org/jquery/test/')
+ [x] jquery v1.4.4 (< v1.9.0b1) (info: 'http://bugs.jquery.com/ticket/11290; http://research.insecurelabs.org/jquery/test/')
+ [x] jquery.prettyPhoto v3.0 (< v3.1.5) (info: 'http://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2013-6837&cid=3')
 
 scan results: possible vulnerabilities found
 ```
