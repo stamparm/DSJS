@@ -44,7 +44,7 @@ def scan_page(url):
                 _ = _retrieve_content(script)
                 if _:
                     scripts[script] = _
-                    hashes[hashlib.md5(_).hexdigest()] = script
+                    hashes[hashlib.sha1(_).hexdigest()] = script
         if scripts:
             definitions = _get_definitions()
             for library, definition in definitions.items():
