@@ -95,4 +95,3 @@ if __name__ == "__main__":
         print "\nscan results: %s vulnerabilities found" % ("possible" if result else "no")
     else:
         parser.print_help()
-
