@@ -28,27 +28,21 @@ Options:
 ```
 
 ```
-$ python dsjs.py -u "http://www.test.com/"
-Damn Small JS Scanner (DSJS) < 100 LoC (Lines of Code) #v0.1a
+$ python dsjs.py -u "www.microsoft.com"
+Damn Small JS Scanner (DSJS) < 100 LoC (Lines of Code) #v0.1b
  by: Miroslav Stampar (@stamparm)
 
- [x] jquery v1.7.2 (< v1.9.0b1) (info: 'http://bugs.jquery.com/ticket/11290; htt
-p://research.insecurelabs.org/jquery/test/')
+ [x] jquery v1.7.2 (< v1.9.0b1) (info: 'http://bugs.jquery.com/ticket/11290; http://research.insecurelabs.org/jquery/test/')
 
 scan results: possible vulnerabilities found
 ```
 
 ```
-$ python dsjs.py -u "http://www.target.com/"
-Damn Small JS Scanner (DSJS) < 100 LoC (Lines of Code) #v0.1a
+$ python dsjs.py -u "www.twitter.com"
+Damn Small JS Scanner (DSJS) < 100 LoC (Lines of Code) #v0.1b
  by: Miroslav Stampar (@stamparm)
 
- [x] jquery v1.4.4 (< v1.6.3) (info: 'http://web.nvd.nist.gov/view/vuln/detail?v
-ulnId=CVE-2011-4969; http://research.insecurelabs.org/jquery/test/')
- [x] jquery v1.4.4 (< v1.9.0b1) (info: 'http://bugs.jquery.com/ticket/11290; htt
-p://research.insecurelabs.org/jquery/test/')
- [x] jquery.prettyPhoto v3.0 (< v3.1.5) (info: 'http://web.nvd.nist.gov/view/vul
-n/detail?vulnId=CVE-2013-6837&cid=3')
+ [x] jquery v1.8.3 (< v1.9.0b1) (info: 'http://bugs.jquery.com/ticket/11290; http://research.insecurelabs.org/jquery/test/')
 
 scan results: possible vulnerabilities found
 ```
