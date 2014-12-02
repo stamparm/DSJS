@@ -32,7 +32,8 @@ $ python dsjs.py -u "www.microsoft.com"
 Damn Small JS Scanner (DSJS) < 100 LoC (Lines of Code) #v0.1b
  by: Miroslav Stampar (@stamparm)
 
- [x] jquery v1.7.2 (< v1.9.0b1) (info: 'http://bugs.jquery.com/ticket/11290; http://research.insecurelabs.org/jquery/test/')
+ [x] jquery v1.7.2 (< v1.9.0b1) (info: 'http://bugs.jquery.com/ticket/11290;
+http://research.insecurelabs.org/jquery/test/')
 
 scan results: possible vulnerabilities found
 ```
@@ -42,7 +43,8 @@ $ python dsjs.py -u "www.twitter.com"
 Damn Small JS Scanner (DSJS) < 100 LoC (Lines of Code) #v0.1b
  by: Miroslav Stampar (@stamparm)
 
- [x] jquery v1.8.3 (< v1.9.0b1) (info: 'http://bugs.jquery.com/ticket/11290; http://research.insecurelabs.org/jquery/test/')
+ [x] jquery v1.8.3 (< v1.9.0b1) (info: 'http://bugs.jquery.com/ticket/11290;
+http://research.insecurelabs.org/jquery/test/')
 
 scan results: possible vulnerabilities found
 ```
