@@ -1,7 +1,7 @@
 Damn Small JS Scanner
 =========
 
-**Damn Small JS Scanner** (DSJS) is a fully functional JavaScript library vulnerability scanner written in under 100 lines of code. It has to be noted that it is a derivative work from [Retire.js](https://bekk.github.io/retire.js/) project.
+**Damn Small JS Scanner** (DSJS) is a fully functional JavaScript library vulnerability scanner written in under 100 lines of code. It has to be noted that it is a derivative work from [Retire.js](https://bekk.github.io/retire.js/) project. Currently it checks for vulnerable versions of following JavaScript libraries: `angularjs`, `backbone`, `dojo`, `easyXDM`, `ember`, `handlebars`, `jPlayer`, `jquery`, `jquery-migrate`, `jquery-mobile`, `jquery-ui-autocomplete`, `jquery-ui-dialog`, `jquery-ui-tooltip`, `jquery.prettyPhoto`, `mustache`, `plupload`, `prototypejs`, `sessvars`, `YUI`.
 
 ![Vulnerable](http://i.imgur.com/RpRBvxV.png)
 
