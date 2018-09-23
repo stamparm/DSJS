@@ -5,7 +5,7 @@ NAME, VERSION, AUTHOR, LICENSE, COMMENT = "Damn Small JS Scanner (DSJS) < 100 Lo
 
 COOKIE, UA, REFERER = "Cookie", "User-Agent", "Referer"                                                         # optional HTTP header names
 TIMEOUT = 30                                                                                                    # connection timeout in seconds
-RETIRE_JS_DEFINITIONS = "https://raw.githubusercontent.com/bekk/retire.js/master/repository/jsrepository.json"  # Retire.JS definitions
+RETIRE_JS_DEFINITIONS = "https://raw.githubusercontent.com/retirejs/retire.js/master/repository/jsrepository.json"  # Retire.JS definitions
 RETIRE_JS_VERSION_MARKER = u"(\xa7\xa7version\xa7\xa7)"                                                         # Retire.JS version marker inside definitions
 
 _headers = {}                                                                                                   # used for storing dictionary with optional header values
