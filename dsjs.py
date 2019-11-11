@@ -1,36 +1,36 @@
 #!/usr/bin/env python2
-import codecs, cookielib, distutils.version, glob, hashlib, json, optparse, os, re, tempfile, urllib, urllib2, urlparse
+import distutils.version, glob, hashlib, json, optparse, os, re, tempfile, urllib, urllib.parse, urllib.request  # Python 3 required
 
-NAME, VERSION, AUTHOR, LICENSE, COMMENT = "Damn Small JS Scanner (DSJS) < 100 LoC (Lines of Code)", "0.1b", "Miroslav Stampar (@stamparm)", "Public domain (FREE)", "(derivative work from Retire.js - https://bekk.github.io/retire.js/)"
+NAME, VERSION, AUTHOR, LICENSE, COMMENT = "Damn Small JS Scanner (DSJS) < 100 LoC (Lines of Code)", "0.2a", "Miroslav Stampar (@stamparm)", "Public domain (FREE)", "(derivative work from Retire.js - https://bekk.github.io/retire.js/)"
 
-COOKIE, UA, REFERER = "Cookie", "User-Agent", "Referer"                                                         # optional HTTP header names
-TIMEOUT = 30                                                                                                    # connection timeout in seconds
+COOKIE, UA, REFERER = "Cookie", "User-Agent", "Referer"                                                             # optional HTTP header names
+TIMEOUT = 30                                                                                                        # connection timeout in seconds
 RETIRE_JS_DEFINITIONS = "https://raw.githubusercontent.com/retirejs/retire.js/master/repository/jsrepository.json"  # Retire.JS definitions
-RETIRE_JS_VERSION_MARKER = u"(\xa7\xa7version\xa7\xa7)"                                                         # Retire.JS version marker inside definitions
+RETIRE_JS_VERSION_MARKER = u"(\xa7\xa7version\xa7\xa7)"                                                             # Retire.JS version marker inside definitions
 
-_headers = {}                                                                                                   # used for storing dictionary with optional header values
+_headers = {}                                                                                                       # used for storing dictionary with optional header values
 
 def _retrieve_content(url, data=None):
     try:
-        req = urllib2.Request("".join(url[i].replace(' ', "%20") if i > url.find('?') else url[i] for i in xrange(len(url))), data, _headers)
-        retval = urllib2.urlopen(req, timeout=TIMEOUT).read()
-    except Exception, ex:
-        retval = ex.read() if hasattr(ex, "read") else getattr(ex, "msg", str())
-    return retval or ""
+        req = urllib.request.Request("".join(url[i].replace(' ', "%20") if i > url.find('?') else url[i] for i in range(len(url))), data.encode("utf-8", "ignore") if data else None, _headers)
+        retval = urllib.request.urlopen(req, timeout=TIMEOUT).read()
+    except Exception as ex:
+        retval = ex.read() if hasattr(ex, "read") else str(ex.args[-1])
+    return (retval.decode("utf-8", "ignore") if hasattr(retval, "decode") else "") or ""
 
 def _get_definitions():
     search = glob.glob(os.path.join(tempfile.gettempdir(), "retire*.json"))
     if search:
-        content = open(search[0], "rb").read()
+        content = open(search[0], "r").read()
     else:
         content = _retrieve_content(RETIRE_JS_DEFINITIONS)
         if not content:
-            print "[x]"
+            print("[x]")
             exit(-1)
         handle, _ = tempfile.mkstemp(prefix="retire", suffix=".json", dir=tempfile.gettempdir())
-        os.write(handle, content)
+        os.write(handle, content.encode("utf8"))
         os.close(handle)
-    return json.loads(content.decode("utf8"))
+    return json.loads(content)
 
 def scan_page(url):
     retval = False
@@ -39,12 +39,12 @@ def scan_page(url):
         scripts = dict()
         content = _retrieve_content(url)
         for match in re.finditer(r"<script[^>]+src=['\"]?([^>]+.js)\b", content):
-            script = urlparse.urljoin(url, match.group(1))
+            script = urllib.parse.urljoin(url, match.group(1))
             if script not in scripts:
                 _ = _retrieve_content(script)
                 if _:
                     scripts[script] = _
-                    hashes[hashlib.sha1(_).hexdigest()] = script
+                    hashes[hashlib.sha1(_.encode("utf8")).hexdigest()] = script
         if scripts:
             definitions = _get_definitions()
             for _ in definitions["dont check"]["extractors"]["uri"]:
@@ -69,19 +69,19 @@ def scan_page(url):
                     for vulnerability in definition["vulnerabilities"]:
                         _ = vulnerability.get("atOrAbove", 0)
                         if distutils.version.LooseVersion(str(_)) <= version < distutils.version.LooseVersion(vulnerability["below"]):
-                            print " [x] %s %sv%s (< v%s) (info: '%s')" % (library, ("" if not _ else "(v%s <) " % _), version.replace(".min", ""), vulnerability["below"], "; ".join(vulnerability["info"]))
+                            print(" [x] %s %sv%s (< v%s) (info: '%s')" % (library, ("" if not _ else "(v%s <) " % _), version.replace(".min", ""), vulnerability["below"], "; ".join(vulnerability["info"])))
                             retval = True
     except KeyboardInterrupt:
-        print "\r (x) Ctrl-C pressed"
+        print("\r (x) Ctrl-C pressed")
     return retval
 
 def init_options(proxy=None, cookie=None, ua=None, referer=None):
     global _headers
     _headers = dict(filter(lambda _: _[1], ((COOKIE, cookie), (UA, ua or NAME), (REFERER, referer))))
-    urllib2.install_opener(urllib2.build_opener(urllib2.ProxyHandler({'http': proxy})) if proxy else None)
+    urllib.request.install_opener(urllib.request.build_opener(urllib.request.ProxyHandler({'http': proxy})) if proxy else None)
 
 if __name__ == "__main__":
-    print "%s #v%s\n by: %s\n" % (NAME, VERSION, AUTHOR)
+    print("%s #v%s\n by: %s\n" % (NAME, VERSION, AUTHOR))
     parser = optparse.OptionParser(version=VERSION)
     parser.add_option("-u", "--url", dest="url", help="Target URL (e.g. \"http://www.target.com\")")
     parser.add_option("--cookie", dest="cookie", help="HTTP Cookie header value")
@@ -92,6 +92,6 @@ if __name__ == "__main__":
     if options.url:
         init_options(options.proxy, options.cookie, options.ua, options.referer)
         result = scan_page(options.url if options.url.startswith("http") else "http://%s" % options.url)
-        print "\nscan results: %s vulnerabilities found" % ("possible" if result else "no")
+        print("\nscan results: %s vulnerabilities found" % ("possible" if result else "no"))
     else:
         parser.print_help()
