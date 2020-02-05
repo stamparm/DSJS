@@ -1,13 +1,14 @@
 #!/usr/bin/env python
-import distutils.version, glob, hashlib, json, optparse, os, re, tempfile, urllib, urllib.parse, urllib.request  # Python 3 required
+import distutils.version, glob, hashlib, json, optparse, os, re, ssl, tempfile, urllib, urllib.parse, urllib.request  # Python 3 required
 
-NAME, VERSION, AUTHOR, LICENSE, COMMENT = "Damn Small JS Scanner (DSJS) < 100 LoC (Lines of Code)", "0.2a", "Miroslav Stampar (@stamparm)", "Public domain (FREE)", "(derivative work from Retire.js - https://bekk.github.io/retire.js/)"
+NAME, VERSION, AUTHOR, LICENSE, COMMENT = "Damn Small JS Scanner (DSJS) < 100 LoC (Lines of Code)", "0.2b", "Miroslav Stampar (@stamparm)", "Public domain (FREE)", "(derivative work from Retire.js - https://bekk.github.io/retire.js/)"
 
 COOKIE, UA, REFERER = "Cookie", "User-Agent", "Referer"                                                             # optional HTTP header names
 TIMEOUT = 30                                                                                                        # connection timeout in seconds
 RETIRE_JS_DEFINITIONS = "https://raw.githubusercontent.com/retirejs/retire.js/master/repository/jsrepository.json"  # Retire.JS definitions
 RETIRE_JS_VERSION_MARKER = u"(\xa7\xa7version\xa7\xa7)"                                                             # Retire.JS version marker inside definitions
 
+ssl._create_default_https_context = ssl._create_unverified_context                                                  # ignore expired and/or self-signed certificates
 _headers = {}                                                                                                       # used for storing dictionary with optional header values
 
 def _retrieve_content(url, data=None):
@@ -57,12 +58,12 @@ def scan_page(url):
                     if item[0] in hashes:
                         version = item[1]
                 for part in ("filename", "uri"):
-                    for regex in (_.replace(RETIRE_JS_VERSION_MARKER, "(?P<version>[^\s]+)") for _ in definition["extractors"].get(part, [])):
+                    for regex in (_.replace(RETIRE_JS_VERSION_MARKER, "(?P<version>[^\s\"]+)") for _ in definition["extractors"].get(part, [])):
                         for script in scripts:
                             match = re.search(regex, script)
                             version = match.group("version") if match else version
                 for script, content in scripts.items():
-                    for regex in (_.replace(RETIRE_JS_VERSION_MARKER, "(?P<version>[^\s]+)") for _ in definition["extractors"].get("filecontent", [])):
+                    for regex in (_.replace(RETIRE_JS_VERSION_MARKER, "(?P<version>[^\s\"]+)") for _ in definition["extractors"].get("filecontent", [])):
                         match = re.search(regex, content)
                         version = match.group("version") if match else version
                 if version:
