@@ -65,8 +65,8 @@ def scan_page(url):
                 for script, content in scripts.items():
                     for regex in (_.replace(RETIRE_JS_VERSION_MARKER, "(?P<version>[^\s\"]+)") for _ in definition["extractors"].get("filecontent", [])):
                         match = re.search(regex, content)
-                        version = match.group("version") if match else version
-                if version:
+                        version = match.group("version") if match else version                        
+                if version and version != "-":                    
                     for vulnerability in definition["vulnerabilities"]:
                         _ = vulnerability.get("atOrAbove", 0)
                         if distutils.version.LooseVersion(str(_)) <= version < distutils.version.LooseVersion(vulnerability["below"]):
