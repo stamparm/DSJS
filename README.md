@@ -11,40 +11,30 @@ Sample runs
 ----
 
 ```
-$ python3 dsjs.py 
-Damn Small JS Scanner (DSJS) < 100 LoC (Lines of Code) #v0.2a
+$ python3 dsjs.py
+Damn Small JS Scanner (DSJS) < 100 LoC (Lines of Code) #v0.3a
  by: Miroslav Stampar (@stamparm)
 
-Usage: dsjs.py [options]
+usage: dsjs.py [-h] [-u URL] [--cookie COOKIE] [--user-agent UA]
+               [--referer REFERER] [--proxy PROXY] [--version]
 
-Options:
-  --version          show program's version number and exit
+options:
   -h, --help         show this help message and exit
-  -u URL, --url=URL  Target URL (e.g. "http://www.target.com")
-  --cookie=COOKIE    HTTP Cookie header value
-  --user-agent=UA    HTTP User-Agent header value
-  --referer=REFERER  HTTP Referer header value
-  --proxy=PROXY      HTTP proxy address (e.g. "http://127.0.0.1:8080")
+  -u URL, --url URL  Target URL (e.g. "http://www.target.com")
+  --cookie COOKIE    HTTP Cookie header value
+  --user-agent UA    HTTP User-Agent header value
+  --referer REFERER  HTTP Referer header value
+  --proxy PROXY      HTTP proxy address (e.g. "http://127.0.0.1:8080")
+  --version          show program's version number and exit
 ```
 
 ```
 $ python3 dsjs.py -u "www.microsoft.com"
-Damn Small JS Scanner (DSJS) < 100 LoC (Lines of Code) #v0.2a
+Damn Small JS Scanner (DSJS) < 100 LoC (Lines of Code) #v0.3a
  by: Miroslav Stampar (@stamparm)
 
- [x] jquery v1.7.2 (< v1.9.0b1) (info: 'http://bugs.jquery.com/ticket/11290;
-http://research.insecurelabs.org/jquery/test/')
-
-scan results: possible vulnerabilities found
-```
-
-```
-$ python3 dsjs.py -u "www.twitter.com"
-Damn Small JS Scanner (DSJS) < 100 LoC (Lines of Code) #v0.2a
- by: Miroslav Stampar (@stamparm)
-
- [x] jquery v1.8.3 (< v1.9.0b1) (info: 'http://bugs.jquery.com/ticket/11290;
-http://research.insecurelabs.org/jquery/test/')
+ [x] jquery (v1.1.4 <) v1.9.1 (< v3.4.0) (info: 'https://blog.jquery.com/2019/04/10/jquery-3-4-0-released/;
+https://nvd.nist.gov/vuln/detail/CVE-2019-11358')
 
 scan results: possible vulnerabilities found
 ```
